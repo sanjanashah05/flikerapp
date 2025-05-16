@@ -1,80 +1,41 @@
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { useRouter } from 'expo-router';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-export default function ProfileScreen() {
-  const router = useRouter();
-
-  const Section = ({ title, children }: { title: string, children: React.ReactNode }) => (
-    <View style={{ marginBottom: 24 }}>
-      <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#fff', marginBottom: 12 }}>{title}</Text>
-      {children}
-    </View>
-  );
-
-  const Card = ({ title, subtitle, onPress }: { title: string, subtitle?: string, onPress?: () => void }) => (
-    <TouchableOpacity
-      onPress={onPress}
-      style={{
-        backgroundColor: '#333',
-        borderRadius: 16,
-        padding: 16,
-        marginBottom: 12,
-      }}
-    >
-      <Text style={{ color: '#fff', fontWeight: '600' }}>{title}</Text>
-      {subtitle && <Text style={{ color: '#bbb' }}>{subtitle}</Text>}
-    </TouchableOpacity>
-  );
-
+export default function Profile() {
   return (
-    <ScrollView style={{ flex: 1, padding: 16, backgroundColor: '#111' }}>
-      {/* Header */}
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
-        <Text style={{ fontSize: 28, color: '#fff' }}>My Profile</Text>
-        <Ionicons name="person-circle" size={32} color="#fff" />
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.username}>sanjana</Text>
+        <Text style={styles.role}>user</Text>
       </View>
 
-      {/* Profile Section */}
-      <Section title="Unified Stats">
-        <Card title="Stats Across All Sports" subtitle="View performance in Cricket, Kabaddi, Football & more" />
-      </Section>
+      <View style={styles.stats}>
+        <Text>Teams: 0</Text>
+        <Text>Matches: 0</Text>
+        <Text>Achievements: 0</Text>
+      </View>
 
-      <Section title="Achievements & Badges">
-        <Card title="🏆 5 Tournament Wins" />
-        <Card title="🔥 MVP x3" />
-        <Card title="💪 100 Matches Played" />
-      </Section>
-
-      <Section title="Teams & Clubs">
-        <Card title="Team Alpha" subtitle="Captain - Football" />
-        <Card title="Kabaddi Legends" subtitle="Member" />
-        <TouchableOpacity
-          style={{
-            backgroundColor: '#444',
-            borderRadius: 16,
-            padding: 12,
-            marginTop: 8,
-          }}
-          onPress={() => router.push('/teams')}
-        >
-          <Text style={{ color: '#fff', fontWeight: '600' }}>View All Teams</Text>
+      {['Account Settings', 'My Teams', 'Achievements', 'Notifications', 'Privacy', 'Help & Support'].map(label => (
+        <TouchableOpacity key={label} style={styles.item}>
+          <Text>{label}</Text>
         </TouchableOpacity>
-      </Section>
+      ))}
 
-      {/* Team Management */}
-      <Section title="Team Management">
-        <Card title="Create or Join a Team" onPress={() => router.push('/create-team')} />
-        <Card title="Invite Friends" onPress={() => router.push('/invite')} />
-        <Card title="Schedule Matches" onPress={() => router.push('/schedule')} />
-      </Section>
+      <TouchableOpacity style={styles.logout}>
+        <Text style={{ color: '#f15a29' }}>Sign Out</Text>
+      </TouchableOpacity>
 
-      {/* Tournaments & Events */}
-      <Section title="Tournaments & Events">
-        <Card title="Create a Tournament" onPress={() => router.push('/create-tournament')} />
-        <Card title="Live Brackets & Fixtures" onPress={() => router.push('/brackets')} />
-        <Card title="Entry Fees & Prize Money" onPress={() => router.push('/prizes')} />
-      </Section>
-    </ScrollView>
+      <Text style={styles.footer}>Fliker v1.0.0</Text>
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: { padding: 24, flex: 1 },
+  header: { backgroundColor: '#f15a29', padding: 20, borderRadius: 10, marginBottom: 16 },
+  username: { color: '#fff', fontSize: 20 },
+  role: { color: '#fff' },
+  stats: { flexDirection: 'row', justifyContent: 'space-around', marginBottom: 24 },
+  item: { backgroundColor: '#f6f6f6', padding: 16, borderRadius: 8, marginVertical: 4 },
+  logout: { alignItems: 'center', padding: 16 },
+  footer: { textAlign: 'center', color: '#ccc', marginTop: 20 },
+});
