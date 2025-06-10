@@ -32,14 +32,63 @@ export default function Register() {
 }
 
 const styles = StyleSheet.create({
-  container: { padding: 24, flex: 1, justifyContent: 'center' },
-  logo: { fontSize: 28, fontWeight: 'bold', color: '#f15a29', textAlign: 'center', marginBottom: 16 },
-  title: { fontSize: 24, fontWeight: 'bold', textAlign: 'center' },
-  subtitle: { textAlign: 'center', marginBottom: 20 },
-  input: { borderWidth: 1, borderColor: '#ccc', borderRadius: 8, padding: 12, marginBottom: 16 },
-  button: { backgroundColor: '#f15a29', padding: 14, borderRadius: 8, alignItems: 'center', marginBottom: 16 },
-  buttonText: { color: 'white', fontWeight: 'bold' },
-  or: { textAlign: 'center', marginVertical: 12 },
-  social: { backgroundColor: '#eee', padding: 12, borderRadius: 6, marginBottom: 8 },
-  link: { textAlign: 'center', marginTop: 16, color: '#f15a29' },
+  container: {
+    padding: 24,
+    flex: 1,
+    backgroundColor: 'black',
+    justifyContent: 'center',
+  },
+  logo: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#F85F6A',
+    textAlign: 'center',
+    marginBottom: 16,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: 'white',
+  },
+  subtitle: {
+    textAlign: 'center',
+    marginBottom: 20,
+    color: 'white',
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 16,
+    color: 'white',
+  },
+  button: {
+    backgroundColor: '#F85F6A',
+    padding: 14,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  buttonText: {
+    color: 'white',
+    fontWeight: 'bold',
+  },
+  or: {
+    textAlign: 'center',
+    marginVertical: 12,
+    color: 'white',
+  },
+  social: {
+    backgroundColor: '#222', // darker for contrast with black background
+    padding: 12,
+    borderRadius: 6,
+    marginBottom: 8,
+  },
+  link: {
+    textAlign: 'center',
+    marginTop: 16,
+    color: '#F85F6A',
+  },
 });

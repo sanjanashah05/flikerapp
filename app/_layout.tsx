@@ -45,7 +45,7 @@ export default function RootLayout() {
   return <RootLayoutNav />;
 }
 
-function RootLayoutNav() {
+function RootLayoutNav() {//stacknav
   const colorScheme = useColorScheme();
 
   return (

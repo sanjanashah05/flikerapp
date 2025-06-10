@@ -1,29 +1,104 @@
-import { View, Text ,TextInput,StyleSheet, ScrollView } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, ImageBackground } from 'react-native';
 
-export default function Home() {
+const featuredMatches = [
+  {
+    title: 'India vs Pakistan',
+    subtitle: 'Cricket · Sun 7PM',
+    image: require('../../assets/feature1.jpg'),
+  },
+  {
+    title: 'Lakers vs Heat',
+    subtitle: 'Basketball · Sat 9PM',
+    image: require('../../assets/feature2.jpg'),
+  },
+];
+
+const liveMatches = [
+  {
+    title: 'Real Madrid vs PSG',
+    teams: 'RMA vs PSG',
+    score: '2 - 1',
+    time: '68\'',
+    status: 'LIVE',
+    image: require('../../assets/live1.jpg'),
+  },
+  {
+    title: 'India vs Australia',
+    teams: 'IND vs AUS',
+    score: '123/4 (14.2)',
+    time: '14m',
+    status: 'LIVE',
+    image: require('../../assets/live2.jpg'),
+  },
+];
+
+export default function HomeScreen() {
   return (
-    <ScrollView style={styles.container}>
-      <Text style={styles.welcome}>Welcome, sanjana</Text>
-      <TextInput placeholder="Search for matches, teams, or players..." style={styles.search} />      <Text style={styles.sectionTitle}>Featured Matches</Text>
-      <View style={styles.featuredCard}>
-        <Text style={styles.featuredText}>Mumbai Titans vs Delhi Warriors</Text>
-        <Text style={styles.liveText}>LIVE - Cricket Premier League</Text>
-      </View>
+    <ScrollView style={styles.container} contentContainerStyle={{ paddingBottom: 40 }}>
+      <Text style={styles.sectionTitle}>🏆 Featured Matches</Text>
+      {featuredMatches.map((item, i) => (
+        <ImageBackground key={i} source={item.image} style={styles.imageCard} imageStyle={{ borderRadius: 12 }}>
+          <View style={styles.overlay}>
+            <Text style={styles.cardTitle}>{item.title}</Text>
+            <Text style={styles.cardSubtitle}>{item.subtitle}</Text>
+          </View>
+        </ImageBackground>
+      ))}
 
-      <Text style={styles.sectionTitle}>Live Matches</Text>
-      <View style={styles.matchCard}><Text>🏏 Mumbai vs Delhi – 120/6 vs 95/4</Text></View>
-      <View style={styles.matchCard}><Text>🏀 Rockets vs Blazers – 78 vs 82</Text></View>
+      <Text style={styles.sectionTitle}>🔴 Live Matches</Text>
+      {liveMatches.map((item, i) => (
+        <ImageBackground key={i} source={item.image} style={styles.imageCard} imageStyle={{ borderRadius: 12 }}>
+          <View style={styles.overlay}>
+            <Text style={styles.cardTitle}>{item.title}</Text>
+            <Text style={styles.cardSubtitle}>{item.teams}</Text>
+            <Text style={styles.cardSubtitle}>Score: {item.score}</Text>
+            <Text style={styles.cardSubtitle}>Time: {item.time}</Text>
+            <Text style={[styles.status, { color: '#F85F6A' }]}>{item.status}</Text>
+          </View>
+        </ImageBackground>
+      ))}
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { padding: 20 },
-  welcome: { fontSize: 18, fontWeight: 'bold', marginBottom: 12 },
-  search: { backgroundColor: '#eee', padding: 12, borderRadius: 8, marginBottom: 20 },
-  sectionTitle: { fontSize: 16, fontWeight: 'bold', marginVertical: 8 },
-  featuredCard: { backgroundColor: '#0b1d40', padding: 16, borderRadius: 8, marginBottom: 16 },
-  featuredText: { color: '#fff', fontSize: 16 },
-  liveText: { color: '#ff5252', fontSize: 12 },
-  matchCard: { backgroundColor: '#f6f6f6', padding: 12, borderRadius: 8, marginVertical: 6 },
+  container: {
+    flex: 1,
+    backgroundColor: 'black',
+    paddingHorizontal: 20,
+    paddingTop: 24,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: '700',
+    color: '#F85F6A',
+    marginTop: 20,
+    marginBottom: 12,
+  },
+  imageCard: {
+    height: 160,
+    marginBottom: 16,
+    justifyContent: 'flex-end',
+  },
+  overlay: {
+    backgroundColor: 'rgba(0, 0, 0, 0.45)',
+    padding: 12,
+    borderBottomLeftRadius: 12,
+    borderBottomRightRadius: 12,
+  },
+  cardTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'white',
+    marginBottom: 4,
+  },
+  cardSubtitle: {
+    fontSize: 13,
+    color: '#ccc',
+  },
+  status: {
+    fontSize: 13,
+    fontWeight: 'bold',
+    marginTop: 6,
+  },
 });
