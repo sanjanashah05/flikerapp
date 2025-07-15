@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet,ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useTheme } from '../../contexts/ThemeContext';
 
@@ -11,7 +11,7 @@ export default function CreateMatchScreen() {
   };
 
   return (
-    <View style={[styles.container, { backgroundColor: colors.background }]}>
+    <ScrollView style={[styles.container, { backgroundColor: colors.background }]}>
       {/* Header */}
       <View style={styles.header}>
         <Text style={[styles.headerTitle, { color: colors.text }]}>Create New Match</Text>
@@ -55,12 +55,12 @@ export default function CreateMatchScreen() {
         </Text>
         <Text style={[styles.tipText, { color: colors.textSecondary }]}>
           • Enable live updates for real-time scoring
-        </TouchableOpacity>
+        </Text>
         <Text style={[styles.tipText, { color: colors.textSecondary }]}>
           • Share match links with spectators
         </Text>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
