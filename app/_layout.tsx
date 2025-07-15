@@ -7,7 +7,8 @@ import { useEffect } from 'react';
 import 'react-native-reanimated';
 import { ThemeProvider as CustomThemeProvider } from '../contexts/ThemeContext';
 
-import { useColorScheme } from '@/components/useColorScheme';
+import { useColorScheme } from '@/components/useColorScheme'
+import { useFrameworkReady } from '@/hooks/useFrameworkReady';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -23,6 +24,7 @@ export const unstable_settings = {
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
+  useFrameworkReady();
   const [loaded, error] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
     ...FontAwesome.font,
