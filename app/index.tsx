@@ -4,49 +4,64 @@ import { useRouter } from 'expo-router';
 
 const { width } = Dimensions.get('window');
 
-export default function TabOneScreen() {
+export default function WelcomeScreen() {
   const router = useRouter();
 
   return (
-    <LinearGradient colors={['#000000', '#000000']} style={styles.container}>
-      {/* Logo and Brand */}
-      <View style={styles.logoWrapper}>
-        <Image
-          source={require('../assets/logo.png')} // SPORTIFY logo here
-          style={styles.logo}
-          resizeMode="contain"
-        />
-        <Text style={styles.brand}>FLIKER</Text>
+    <LinearGradient colors={['#000000', '#1a1a1a']} style={styles.container}>
+      {/* Custom Logo Design */}
+      <View style={styles.logoContainer}>
+        <View style={styles.logoCircle}>
+          <View style={styles.logoInner}>
+            <Text style={styles.logoIcon}>⚡</Text>
+          </View>
+        </View>
+        <Text style={styles.brandName}>FLIKER</Text>
+        <Text style={styles.tagline}>Bringing Every Match to Life!</Text>
       </View>
 
-      {/* Hero Image */}
-      <Image
-        source={require('../assets/logo.png')} // Replace with the footballer image
-        style={styles.hero}
-        resizeMode="contain"
-      />
+      {/* Hero Section */}
+      <View style={styles.heroSection}>
+        <View style={styles.sportsGrid}>
+          <View style={styles.sportIcon}>
+            <Text style={styles.sportEmoji}>🏏</Text>
+          </View>
+          <View style={styles.sportIcon}>
+            <Text style={styles.sportEmoji}>🏀</Text>
+          </View>
+          <View style={styles.sportIcon}>
+            <Text style={styles.sportEmoji}>⚽</Text>
+          </View>
+          <View style={styles.sportIcon}>
+            <Text style={styles.sportEmoji}>🤼</Text>
+          </View>
+        </View>
+      </View>
 
-      {/* Title & Subtitle */}
-      <Text style={styles.title}>BRINGING EVERY MATCH TO LIFE</Text>
-      <Text style={styles.subtitle}>
-        Watch sports live or highlights, read every news from your smartphone.
-      </Text>
+      {/* Title & Description */}
+      <View style={styles.textSection}>
+        <Text style={styles.title}>Multi-Sport Live Scoring</Text>
+        <Text style={styles.subtitle}>
+          Real-time updates for Cricket, Basketball, Football & Kabaddi. 
+          Create matches, track scores, and manage tournaments all in one place.
+        </Text>
+      </View>
 
-      {/* Buttons */}
+      {/* Get Started Button */}
       <TouchableOpacity
-        onPress={() => router.replace('/login')}
-        style={styles.loginButton}
+        onPress={() => router.replace('/auth/login')}
+        style={styles.getStartedButton}
         activeOpacity={0.85}
-      > 
-        <Text style={styles.loginText}>LOGIN</Text>
+      >
+        <Text style={styles.getStartedText}>Get Started</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity 
-      style={styles.signupButton}
-      onPress={() => router.replace('/register')}
-       activeOpacity={0.85}>
-        <Text style={styles.signupText}>CREATE ACCOUNT</Text>
-      </TouchableOpacity>
+      {/* Features Preview */}
+      <View style={styles.featuresPreview}>
+        <Text style={styles.featureText}>✨ Live Match Updates</Text>
+        <Text style={styles.featureText}>📊 Real-time Statistics</Text>
+        <Text style={styles.featureText}>🏆 Tournament Management</Text>
+      </View>
     </LinearGradient>
   );
 }
@@ -54,70 +69,118 @@ export default function TabOneScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 60,
+    paddingTop: 80,
     alignItems: 'center',
     paddingHorizontal: 24,
   },
-  logoWrapper: {
-    flexDirection: 'row',
+  logoContainer: {
     alignItems: 'center',
-    alignSelf: 'flex-start',
-    marginBottom: 20,
+    marginBottom: 40,
   },
-  logo: {
-    width: 24,
-    height: 24,
-    marginRight: 8,
+  logoCircle: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    backgroundColor: '#F85F6A',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 16,
+    shadowColor: '#F85F6A',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 8,
   },
-  brand: {
-    fontSize: 16,
-    fontWeight: '700',
-    color: '#fff',
+  logoInner: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: 'rgba(255,255,255,0.2)',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  hero: {
-    width: width * 0.85,
-    height: width * 0.85,
-    marginBottom: 30,
+  logoIcon: {
+    fontSize: 28,
+    color: 'white',
   },
-  title: {
-    fontSize: 20,
+  brandName: {
+    fontSize: 32,
     fontWeight: '900',
     color: '#fff',
+    letterSpacing: 2,
+    marginBottom: 8,
+  },
+  tagline: {
+    fontSize: 16,
+    color: '#F85F6A',
+    fontWeight: '600',
     textAlign: 'center',
-    marginBottom: 10,
+  },
+  heroSection: {
+    marginBottom: 40,
+  },
+  sportsGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    gap: 20,
+  },
+  sportIcon: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: 'rgba(248, 95, 106, 0.1)',
+    borderWidth: 2,
+    borderColor: 'rgba(248, 95, 106, 0.3)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  sportEmoji: {
+    fontSize: 24,
+  },
+  textSection: {
+    alignItems: 'center',
+    marginBottom: 40,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: '800',
+    color: '#fff',
+    textAlign: 'center',
+    marginBottom: 16,
   },
   subtitle: {
-    fontSize: 14,
+    fontSize: 16,
     color: '#ccc',
     textAlign: 'center',
-    marginBottom: 30,
-    lineHeight: 22,
+    lineHeight: 24,
+    paddingHorizontal: 20,
   },
-  loginButton: {
+  getStartedButton: {
     backgroundColor: '#F85F6A',
-    borderRadius: 10,
-    paddingVertical: 14,
-    paddingHorizontal: 40,
-    width: '100%',
-    marginBottom: 12,
+    borderRadius: 25,
+    paddingVertical: 16,
+    paddingHorizontal: 60,
+    marginBottom: 30,
+    shadowColor: '#F85F6A',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 8,
   },
-  loginText: {
-    textAlign: 'center',
+  getStartedText: {
     color: '#fff',
-    fontWeight: '600',
-    fontSize: 16,
-  },
-  signupButton: {
-    backgroundColor: '#f1f1f1',
-    borderRadius: 10,
-    paddingVertical: 14,
-    paddingHorizontal: 40,
-    width: '100%',
-  },
-  signupText: {
+    fontWeight: '700',
+    fontSize: 18,
     textAlign: 'center',
-    color: '#111',
-    fontWeight: '600',
-    fontSize: 16,
+  },
+  featuresPreview: {
+    alignItems: 'center',
+    gap: 8,
+  },
+  featureText: {
+    color: '#999',
+    fontSize: 14,
+    fontWeight: '500',
   },
 });

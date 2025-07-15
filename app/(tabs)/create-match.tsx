@@ -7,34 +7,135 @@ export default function CreateMatchScreen() {
   const router = useRouter();
 
   const handleSelectSport = (sport: string) => {
-    router.push(`/${sport}`);
+    router.push(`/match/create-${sport}`);
   };
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
-      <Text style={[styles.header, { color: colors.text }]}>Ready to create a match?</Text>
-      <Text style={[styles.subtext, { color: colors.textSecondary }]}>Choose your sport to continue:</Text>
+      {/* Header */}
+      <View style={styles.header}>
+        <Text style={[styles.headerTitle, { color: colors.text }]}>Create New Match</Text>
+        <Text style={[styles.headerSubtitle, { color: colors.textSecondary }]}>
+          Choose your sport and start scoring live matches
+        </Text>
+      </View>
 
-      {['cricket', 'kabaddi', 'basketball', 'football'].map((sport) => (
-        <TouchableOpacity key={sport} style={[styles.button, { backgroundColor: colors.primary }]} onPress={() => handleSelectSport(sport)}>
-          <Text style={styles.buttonText}>{sport.toUpperCase()}</Text>
+      {/* Sports Selection */}
+      <View style={styles.sportsContainer}>
+        {[
+          { id: 'cricket', name: 'Cricket', icon: '🏏', description: 'T10, T20, ODI, Test formats' },
+          { id: 'basketball', name: 'Basketball', icon: '🏀', description: 'Quarter-based scoring' },
+          { id: 'football', name: 'Football', icon: '⚽', description: 'Goals, assists, cards' },
+          { id: 'kabaddi', name: 'Kabaddi', icon: '🤼', description: 'Raid-based scoring' },
+        ].map((sport) => (
+          <TouchableOpacity 
+            key={sport.id} 
+            style={[styles.sportCard, { backgroundColor: colors.surface }]} 
+            onPress={() => handleSelectSport(sport.id)}
+          >
+            <Text style={styles.sportIcon}>{sport.icon}</Text>
+            <View style={styles.sportInfo}>
+              <Text style={[styles.sportName, { color: colors.text }]}>{sport.name}</Text>
+              <Text style={[styles.sportDescription, { color: colors.textSecondary }]}>
+                {sport.description}
+              </Text>
+            </View>
+            <View style={[styles.arrowIcon, { backgroundColor: colors.primary }]}>
+              <Text style={styles.arrowText}>→</Text>
+            </View>
+          </TouchableOpacity>
+        ))}
+      </View>
+
+      {/* Quick Tips */}
+      <View style={styles.tipsSection}>
+        <Text style={[styles.tipsTitle, { color: colors.primary }]}>💡 Quick Tips</Text>
+        <Text style={[styles.tipText, { color: colors.textSecondary }]}>
+          • Set up teams and players before starting
+        </Text>
+        <Text style={[styles.tipText, { color: colors.textSecondary }]}>
+          • Enable live updates for real-time scoring
         </TouchableOpacity>
-      ))}
+        <Text style={[styles.tipText, { color: colors.textSecondary }]}>
+          • Share match links with spectators
+        </Text>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: 'center', alignItems: 'center', padding: 24 },
-  header: { fontSize: 22, fontWeight: 'bold', marginBottom: 12 },
-  subtext: { fontSize: 14, marginBottom: 24 },
-  button: {
-    paddingVertical: 14,
-    paddingHorizontal: 36,
-    borderRadius: 10,
-    marginBottom: 12,
-    width: '80%',
+  container: { 
+    flex: 1, 
+    paddingTop: 60,
+    paddingHorizontal: 20,
+  },
+  header: {
+    marginBottom: 30,
+  },
+  headerTitle: { 
+    fontSize: 28, 
+    fontWeight: 'bold', 
+    marginBottom: 8,
+  },
+  headerSubtitle: { 
+    fontSize: 16, 
+    lineHeight: 22,
+  },
+  sportsContainer: {
+    gap: 16,
+    marginBottom: 30,
+  },
+  sportCard: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 20,
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: '#333',
+  },
+  sportIcon: {
+    fontSize: 32,
+    marginRight: 16,
+  },
+  sportInfo: {
+    flex: 1,
+  },
+  sportName: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 4,
+  },
+  sportDescription: {
+    fontSize: 14,
+  },
+  arrowIcon: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    justifyContent: 'center',
     alignItems: 'center',
   },
-  buttonText: { color: 'white', fontWeight: '600', fontSize: 16 },
+  arrowText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  tipsSection: {
+    backgroundColor: 'rgba(248, 95, 106, 0.05)',
+    borderRadius: 12,
+    padding: 16,
+    borderWidth: 1,
+    borderColor: 'rgba(248, 95, 106, 0.2)',
+  },
+  tipsTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 12,
+  },
+  tipText: {
+    fontSize: 14,
+    marginBottom: 6,
+    lineHeight: 20,
+  },
 });
