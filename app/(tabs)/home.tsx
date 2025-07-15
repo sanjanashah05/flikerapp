@@ -1,4 +1,5 @@
 import { View, Text, ScrollView, StyleSheet, ImageBackground } from 'react-native';
+import { useTheme } from '../../contexts/ThemeContext';
 
 const featuredMatches = [
   {
@@ -33,27 +34,29 @@ const liveMatches = [
 ];
 
 export default function HomeScreen() {
+  const { colors } = useTheme();
+
   return (
-    <ScrollView style={styles.container} contentContainerStyle={{ paddingBottom: 40 }}>
-      <Text style={styles.sectionTitle}>🏆 Featured Matches</Text>
+    <ScrollView style={[styles.container, { backgroundColor: colors.background }]} contentContainerStyle={{ paddingBottom: 40 }}>
+      <Text style={[styles.sectionTitle, { color: colors.primary }]}>🏆 Featured Matches</Text>
       {featuredMatches.map((item, i) => (
         <ImageBackground key={i} source={item.image} style={styles.imageCard} imageStyle={{ borderRadius: 12 }}>
           <View style={styles.overlay}>
-            <Text style={styles.cardTitle}>{item.title}</Text>
-            <Text style={styles.cardSubtitle}>{item.subtitle}</Text>
+            <Text style={[styles.cardTitle, { color: 'white' }]}>{item.title}</Text>
+            <Text style={[styles.cardSubtitle, { color: '#ccc' }]}>{item.subtitle}</Text>
           </View>
         </ImageBackground>
       ))}
 
-      <Text style={styles.sectionTitle}>🔴 Live Matches</Text>
+      <Text style={[styles.sectionTitle, { color: colors.primary }]}>🔴 Live Matches</Text>
       {liveMatches.map((item, i) => (
         <ImageBackground key={i} source={item.image} style={styles.imageCard} imageStyle={{ borderRadius: 12 }}>
           <View style={styles.overlay}>
-            <Text style={styles.cardTitle}>{item.title}</Text>
-            <Text style={styles.cardSubtitle}>{item.teams}</Text>
-            <Text style={styles.cardSubtitle}>Score: {item.score}</Text>
-            <Text style={styles.cardSubtitle}>Time: {item.time}</Text>
-            <Text style={[styles.status, { color: '#F85F6A' }]}>{item.status}</Text>
+            <Text style={[styles.cardTitle, { color: 'white' }]}>{item.title}</Text>
+            <Text style={[styles.cardSubtitle, { color: '#ccc' }]}>{item.teams}</Text>
+            <Text style={[styles.cardSubtitle, { color: '#ccc' }]}>Score: {item.score}</Text>
+            <Text style={[styles.cardSubtitle, { color: '#ccc' }]}>Time: {item.time}</Text>
+            <Text style={[styles.status, { color: colors.primary }]}>{item.status}</Text>
           </View>
         </ImageBackground>
       ))}
@@ -64,14 +67,12 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black',
     paddingHorizontal: 20,
     paddingTop: 24,
   },
   sectionTitle: {
     fontSize: 18,
     fontWeight: '700',
-    color: '#F85F6A',
     marginTop: 20,
     marginBottom: 12,
   },
@@ -89,12 +90,10 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: 'white',
     marginBottom: 4,
   },
   cardSubtitle: {
     fontSize: 13,
-    color: '#ccc',
   },
   status: {
     fontSize: 13,

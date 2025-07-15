@@ -1,7 +1,9 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
+import { useTheme } from '../../contexts/ThemeContext';
 
 export default function CreateMatchScreen() {
+  const { colors } = useTheme();
   const router = useRouter();
 
   const handleSelectSport = (sport: string) => {
@@ -9,12 +11,12 @@ export default function CreateMatchScreen() {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.header}>Ready to create a match?</Text>
-      <Text style={styles.subtext}>Choose your sport to continue:</Text>
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
+      <Text style={[styles.header, { color: colors.text }]}>Ready to create a match?</Text>
+      <Text style={[styles.subtext, { color: colors.textSecondary }]}>Choose your sport to continue:</Text>
 
       {['cricket', 'kabaddi', 'basketball', 'football'].map((sport) => (
-        <TouchableOpacity key={sport} style={styles.button} onPress={() => handleSelectSport(sport)}>
+        <TouchableOpacity key={sport} style={[styles.button, { backgroundColor: colors.primary }]} onPress={() => handleSelectSport(sport)}>
           <Text style={styles.buttonText}>{sport.toUpperCase()}</Text>
         </TouchableOpacity>
       ))}
@@ -23,11 +25,10 @@ export default function CreateMatchScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: 'black', justifyContent: 'center', alignItems: 'center', padding: 24 },
-  header: { fontSize: 22, color: 'white', fontWeight: 'bold', marginBottom: 12 },
-  subtext: { fontSize: 14, color: '#aaa', marginBottom: 24 },
+  container: { flex: 1, justifyContent: 'center', alignItems: 'center', padding: 24 },
+  header: { fontSize: 22, fontWeight: 'bold', marginBottom: 12 },
+  subtext: { fontSize: 14, marginBottom: 24 },
   button: {
-    backgroundColor: '#F85F6A',
     paddingVertical: 14,
     paddingHorizontal: 36,
     borderRadius: 10,

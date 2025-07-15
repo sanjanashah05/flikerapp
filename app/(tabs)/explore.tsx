@@ -1,5 +1,6 @@
 import { View, Text, TextInput, ScrollView, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { useState } from 'react';
+import { useTheme } from '../../contexts/ThemeContext';
 
 const sports = ['🔥 Trending', 'Football', 'Basketball', 'Cricket', 'Kabaddi'];
 
@@ -24,6 +25,7 @@ const matches = [
   },
 ];
 export default function ExploreScreen() {
+  const { colors } = useTheme();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedSport, setSelectedSport] = useState('🔥 Trending');
 
@@ -33,12 +35,12 @@ export default function ExploreScreen() {
   );
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
       {/* Search Bar */}
       <TextInput
         placeholder="Search team, sport or venue"
-        placeholderTextColor="#aaa"
-        style={styles.search}
+        placeholderTextColor={colors.textSecondary}
+        style={[styles.search, { backgroundColor: colors.surface, color: colors.text }]}
         value={searchQuery}
         onChangeText={setSearchQuery}
       />
@@ -52,13 +54,15 @@ export default function ExploreScreen() {
               onPress={() => setSelectedSport(sport)}
               style={[
                 styles.filterButton,
-                selectedSport === sport && styles.filterSelected,
+                { backgroundColor: colors.surface },
+                selectedSport === sport && { backgroundColor: colors.primary },
               ]}
             >
               <Text
                 style={[
                   styles.filterText,
-                  selectedSport === sport && styles.filterTextSelected,
+                  { color: colors.text },
+                  selectedSport === sport && { color: 'white', fontWeight: 'bold' },
                 ]}
               >
                 {sport}
@@ -71,12 +75,12 @@ export default function ExploreScreen() {
       {/* Match List */}
       <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
         {filteredMatches.map((match, i) => (
-          <View key={i} style={styles.card}>
+          <View key={i} style={[styles.card, { backgroundColor: colors.surface }]}>
             <Image source={match.image} style={styles.cardImage} />
             <View style={styles.cardOverlay}>
-              <Text style={styles.cardTitle}>{match.title}</Text>
-              <Text style={styles.cardSubtitle}>{match.time}</Text>
-              <Text style={styles.cardSport}>{match.sport}</Text>
+              <Text style={[styles.cardTitle, { color: 'white' }]}>{match.title}</Text>
+              <Text style={[styles.cardSubtitle, { color: '#ccc' }]}>{match.time}</Text>
+              <Text style={[styles.cardSport, { color: colors.primary }]}>{match.sport}</Text>
             </View>
           </View>
         ))}
@@ -88,13 +92,10 @@ export default function ExploreScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black',
     paddingTop: 50,
     paddingHorizontal: 16,
   },
   search: {
-    backgroundColor: '#1e1e1e',
-    color: 'white',
     paddingHorizontal: 16,
     paddingVertical: 12,
     borderRadius: 12,
@@ -106,7 +107,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   filterButton: {
-  backgroundColor: '#1e1e1e',
   paddingVertical: 8,
   paddingHorizontal: 14,
   borderRadius: 20,
@@ -114,22 +114,13 @@ const styles = StyleSheet.create({
   flexShrink: 1,  // ✅ prevent it from expanding too much
 },
 
-  filterSelected: {
-    backgroundColor: '#F85F6A',
-  },
   filterText: {
-    color: 'white',
     fontSize: 14,
-  },
-  filterTextSelected: {
-    color: 'black',
-    fontWeight: 'bold',
   },
   card: {
     marginBottom: 20,
     borderRadius: 14,
     overflow: 'hidden',
-    backgroundColor: '#1e1e1e',
   },
   cardImage: {
     width: '100%',
@@ -145,15 +136,12 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: 'white',
   },
   cardSubtitle: {
     fontSize: 13,
-    color: '#ccc',
   },
   cardSport: {
     fontSize: 13,
-    color: '#F85F6A',
     marginTop: 4,
   },
 });
